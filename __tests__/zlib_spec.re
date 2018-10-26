@@ -11,6 +11,7 @@ let rec hanoiBase = (f, t, x, n) => switch (n) {
 
 let hanoi = (n:int) => hanoiBase("a", "b", "c", n);
 
+/* it's 131070 bytes long */
 let bigString = hanoi(16);
 
 let () =
@@ -30,19 +31,20 @@ let () =
     "zlib",
     ExpectJs.(
       () => {
-        test("#deflateSync then #inflateSync", () =>
+        test("#deflateSync then #inflateSync on foxString", () =>
           expect(Node.Buffer.toString(Zlib.inflateSync(Zlib.deflateSync(Node.Buffer.fromString(foxString)))))
           |> toBe(foxString)
         );
       }
     ),
   );
+
 let () =
   describe(
     "zlib",
     ExpectJs.(
       () => {
-        test("#deflateSync then #inflateSync", () =>
+        test("#deflateSync then #inflateSync on bigString", () =>
           expect(Node.Buffer.toString(Zlib.inflateSync(Zlib.deflateSync(Node.Buffer.fromString(bigString)))))
           |> toBe(bigString)
         );
